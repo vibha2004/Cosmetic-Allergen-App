@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/d2"
+    tools:context=".PreferencesActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/diet_label"
+                android:textColor="@color/parsayellow"
+                android:textSize="30sp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="16dp" />
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <CheckBox
+                        android:id="@+id/Fragrance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/fragrance_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/Cruelty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/cruelty_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <CheckBox
+                        android:id="@+id/Lanolin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/lanolin_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/Sulphate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/sulphate_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <CheckBox
+                        android:id="@+id/Additive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/additive_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/Pore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/pore_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <CheckBox
+                        android:id="@+id/Paraben"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/paraben_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/Organic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/organic_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+                    <CheckBox
+                        android:id="@+id/Metal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/metal_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+
+                    <CheckBox
+                        android:id="@+id/Sensitive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@android:color/black"
+                        android:text="@string/sensitive_choice"
+                        android:textColor="@color/parsapurple"
+                        android:textSize="20sp" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Custom Allergen:"
+                android:textColor="@color/parsapurple"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/customAllergenInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter custom allergen"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/addAllergenButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="Add Allergen"
+                android:background="@drawable/rounded_btn"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/addedAllergensText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/parsapurple"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/Apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_btn"
+                android:padding="10dp"
+                android:text="Apply Preferences"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">AllerGlam</string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">ParsaFood</string>
+    <string name="parsafood_logo_descr">ParsaFood Logo</string>
+    <string name="ocr_header">Click &quot;Detect Text&quot; to detect text</string>
+    <string name="scan_ingredients">Scan Ingredients</string>
+    <string name="set_allergens">Set Preferences</string>
+    <string name="enter_prefs">Tell me about yourself.</string>
+    <string name="age_label">Age</string>
+    <string name="weight_label">Weight (kg)</string>
+    <string name="height_label">Height (cm)</string>
+    <string name="basic_info_label">Basic Information</string>
+    <string name="diet_label">Cosmetic Allergens</string>
+    <string name="fragrance_choice">Fragrance Allergy</string>
+    <string name="paraben_choice">Paraben Allergy</string>
+    <string name="additive_choice">Colour Additives</string>
+    <string name="metal_choice">Metal Allergy</string>
+    <string name="sulphate_choice">Sulphate Allergy</string>
+    <string name="cruelty_choice">Cruelty Free</string>
+    <string name="lanolin_choice">Lanolin Allergy</string>
+    <string name="pore_choice">Non-Comedogenic</string>
+    <string name="organic_choice">100% Organic</string>
+    <string name="sensitive_choice">Sensitive Skin</string>
+    <string name="ocr_success">Text read successfully</string>
+    <string name="ocr_failure">No text captured</string>
+    <string name="ocr_error">"Error reading text: %1$s"</string>
+    <string name="scan_preferences">Scan preferences</string>
+</resources>
