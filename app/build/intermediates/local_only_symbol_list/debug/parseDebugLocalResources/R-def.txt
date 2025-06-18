@@ -18,6 +18,8 @@ color parsapurple
 color parsayellow
 color purple
 color red
+color success_green
+color warning_red
 color white
 dimen activity_horizontal_margin
 dimen activity_vertical_margin
@@ -25,9 +27,11 @@ drawable bg
 drawable check
 drawable d1
 drawable d2
+drawable edittext_background
 drawable food_doctor
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_warning
 drawable negative
 drawable rounded_btn
 font opensans_semibold

@@ -3,6 +3,7 @@ package com.example.smartfoods;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +35,69 @@ public class AfterCaptureActivity extends AppCompatActivity {
     TextView titleText;
     TextParser parser = new TextParser();
     LinearLayout badIngredientsBox;
+
+    private void displayNegativeNested(ArrayList<ArrayList<String>> result) {
+        // Add section header
+        TextView sectionHeader = new TextView(this);
+        sectionHeader.setText("Allergen Warnings");
+        sectionHeader.setTextColor(Color.rgb(209, 89, 98));
+        sectionHeader.setTextSize(18);
+        sectionHeader.setTypeface(null, Typeface.BOLD);
+        sectionHeader.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+        sectionHeader.setGravity(Gravity.CENTER_HORIZONTAL);
+        sectionHeader.setPadding(0, 0, 0, 16);
+        badIngredientsBox.addView(sectionHeader);
+
+        // Rest of your existing code with improved item styling
+        for (int i = 0; i < result.size() - 1; i++) {
+            for (int j = 0; j < result.get(i).size(); j++) {
+                String[] parts = result.get(i).get(j).split("\\|", 2);
+                String ingredient = parts[0];
+                String explanation = parts.length > 1 ? parts[1] : "";
+
+                // Create a horizontal layout for each allergen item
+                LinearLayout itemLayout = new LinearLayout(this);
+                itemLayout.setOrientation(LinearLayout.HORIZONTAL);
+                itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                itemLayout.setPadding(0, 8, 0, 8);
+
+                // Add warning icon
+                ImageView icon = new ImageView(this);
+                icon.setImageResource(R.drawable.ic_warning);
+                icon.setLayoutParams(new LinearLayout.LayoutParams(
+                        24, 24));
+                icon.setPadding(0, 0, 16, 0);
+                itemLayout.addView(icon);
+
+                // Add ingredient text
+                TextView text = new TextView(this);
+                text.setText(ingredient);
+                text.setTextColor(Color.rgb(209, 89, 98));
+                text.setLayoutParams(new LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+                text.setGravity(Gravity.START);
+                text.setTextSize(16);
+                text.setPaintFlags(text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+                // Add click listener
+                text.setOnClickListener(v -> {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Allergen Warning");
+                    builder.setMessage(explanation);
+                    builder.setPositiveButton("OK", null);
+                    builder.show();
+                });
+
+                itemLayout.addView(text);
+                badIngredientsBox.addView(itemLayout);
+            }
+        }
+    }
     Drawable check;
     Drawable negative;
     String preferences;
@@ -75,44 +139,57 @@ public class AfterCaptureActivity extends AppCompatActivity {
             Log.i("ITEM " + i, itemList.get(i));
         }
 
+        // Get allergen checks
         ArrayList<ArrayList<String>> allergenItems = parser.checkAllergens(itemList);
         ArrayList<String> lactoseItems = parser.checkPore(itemList);
         ArrayList<String> veganItems = parser.checkSensitive(itemList);
         ArrayList<String> vegetarianItems = parser.checkOrganic(itemList);
         ArrayList<String> glutenItems = parser.checkCruelty(itemList);
 
-        Log.i("size allergerns", "" + allergenItems.size());
-        Log.i("size lactoseItems", "" + lactoseItems.size());
-        Log.i("size veganItems", "" + veganItems.size());
-        Log.i("size vegetarianItems", "" + vegetarianItems.size());
-        Log.i("size glutenItems", "" + glutenItems.size());
+        // Log actual contents of lists
+        Log.i("Allergen Check", "Allergen items: " + allergenItems.get(0).size());
+        Log.i("Allergen Check", "Allergen message: " + allergenItems.get(1).size());
+        Log.i("Allergen Check", "Lactose items: " + lactoseItems.size());
+        Log.i("Allergen Check", "Vegan items: " + veganItems.size());
+        Log.i("Allergen Check", "Vegetarian items: " + vegetarianItems.size());
+        Log.i("Allergen Check", "Gluten items: " + glutenItems.size());
 
-        if (noBadIngredients(allergenItems, lactoseItems, veganItems, vegetarianItems, glutenItems)) {
+        // Check if any actual allergens were found
+        boolean hasAllergens = !allergenItems.get(0).isEmpty();
+        boolean hasLactose = !lactoseItems.isEmpty();
+        boolean hasVegan = !veganItems.isEmpty();
+        boolean hasVegetarian = !vegetarianItems.isEmpty();
+        boolean hasGluten = !glutenItems.isEmpty();
+
+        if (!hasAllergens && !hasLactose && !hasVegan && !hasVegetarian && !hasGluten) {
             Log.i("OK", "its a");
-            speechText.append("The ingredients are okay.");
             
             // Set title text and color
-            titleText.setText("Ingredients are OK!");
-            titleText.setTextColor(Color.rgb(102, 187, 106));
+            titleText.setText("Product is Safe!");
+            titleText.setTextColor(Color.rgb(102, 187, 106)); // Green color
             
             // Show checkmark icon
             icon.setImageDrawable(check);
             
-            // Add "Ingredients OK" message to badIngredientsBox
+            // Clear any previous views and add safe message
+            badIngredientsBox.removeAllViews();
+            
+            // Add "Product is Safe" message with check icon
             TextView okMessage = new TextView(this);
-            okMessage.setText("All ingredients are safe based on your preferences.");
-            okMessage.setTextColor(Color.rgb(102, 187, 106));
-            okMessage.setTextSize(16);
+            okMessage.setText("✓ All ingredients are safe based on your preferences.");
+            okMessage.setTextColor(Color.rgb(102, 187, 106)); // Green color
+            okMessage.setTextSize(18); // Slightly larger text
+            okMessage.setTypeface(null, Typeface.BOLD); // Make it bold
             okMessage.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
             okMessage.setGravity(Gravity.CENTER_HORIZONTAL);
-            okMessage.setPadding(0, 0, 0, 20);
+            okMessage.setPadding(0, 16, 0, 16); // Add some padding
+            
             badIngredientsBox.addView(okMessage);
         } else {
             Log.i("OK", "its n");
             speechText.append("The ingredients are not okay, ");
-            icon.setImageDrawable(check);
             titleText.setText("Ingredients are not OK. ");
             titleText.setTextColor(Color.rgb(209, 89, 98));
             icon.setImageDrawable(negative);
@@ -160,12 +237,25 @@ public class AfterCaptureActivity extends AppCompatActivity {
         });
     }
 
-    private boolean noBadIngredients(ArrayList<ArrayList<String>> a,
-                                     ArrayList<String> b,
-                                     ArrayList<String> c,
-                                     ArrayList<String> d,
-                                     ArrayList<String> e) {
-        return (a.size() == 0) && (b.size() == 0) && (c.size() == 0) && (d.size() == 0) && (e.size() == 0);
+    private boolean noBadIngredients(ArrayList<ArrayList<String>> allergenItems,
+                                     ArrayList<String> lactoseItems,
+                                     ArrayList<String> veganItems,
+                                     ArrayList<String> vegetarianItems,
+                                     ArrayList<String> glutenItems) {
+        // Only check the first list in allergenItems for actual allergens
+        boolean hasAllergens = !allergenItems.get(0).isEmpty();
+        boolean hasLactose = !lactoseItems.isEmpty();
+        boolean hasVegan = !veganItems.isEmpty();
+        boolean hasVegetarian = !vegetarianItems.isEmpty();
+        boolean hasGluten = !glutenItems.isEmpty();
+        
+        Log.i("Allergen Check", "Has allergens: " + hasAllergens);
+        Log.i("Allergen Check", "Has lactose: " + hasLactose);
+        Log.i("Allergen Check", "Has vegan: " + hasVegan);
+        Log.i("Allergen Check", "Has vegetarian: " + hasVegetarian);
+        Log.i("Allergen Check", "Has gluten: " + hasGluten);
+        
+        return !(hasAllergens || hasLactose || hasVegan || hasVegetarian || hasGluten);
     }
 
     public void onBackPressed() {
@@ -176,55 +266,6 @@ public class AfterCaptureActivity extends AppCompatActivity {
         finish();
     }
 
-    private void displayNegativeNested(ArrayList<ArrayList<String>> result) {
-        // First line is the general warning
-        TextView warningText = new TextView(this);
-        warningText.setText(result.get(result.size() - 1).get(0));
-        warningText.setTextColor(Color.rgb(209, 89, 98));
-        warningText.setTextSize(16);
-        warningText.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        warningText.setGravity(Gravity.CENTER_HORIZONTAL);
-        warningText.setPadding(0, 0, 0, 20);
-        badIngredientsBox.addView(warningText);
-
-        // Add each detected allergen with clickable explanation
-        for (int i = 0; i < result.size() - 1; i++) {
-            for (int j = 0; j < result.get(i).size(); j++) {
-                String[] parts = result.get(i).get(j).split("\\|", 2);
-                String ingredient = parts[0];
-                String explanation = parts.length > 1 ? parts[1] : "";
-
-                TextView text = new TextView(this);
-                text.setText(ingredient);
-                text.setTextColor(Color.rgb(209, 89, 98));
-                text.setLayoutParams(new ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT));
-                text.setGravity(Gravity.CENTER_HORIZONTAL);
-                text.setTextSize(14);
-
-                // Add underline to indicate clickable
-                text.setPaintFlags(text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
-                // Add click listener to show full explanation
-                text.setOnClickListener(v -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Allergen Warning");
-                    builder.setMessage(explanation);
-                    builder.setPositiveButton("OK", null);
-                    builder.show();
-                });
-
-                badIngredientsBox.addView(text);
-            }
-        }
-
-        // Add to speech text
-        speechText.append(result.get(result.size() - 1).get(0));
-        speechText.append(" ");
-    }
 
     private void displayNegative(ArrayList<String> result) {
         Log.i("Cheese", "in" + result.size());

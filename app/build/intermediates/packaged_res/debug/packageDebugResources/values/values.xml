@@ -33,6 +33,8 @@
     <item name="parsayellow" type="color">#8f5e00</item>
     <item name="purple" type="color">#FFAA66CC</item>
     <item name="red" type="color">#FFFF4444</item>
+    <color name="success_green">#66BB6A</color>
+    <color name="warning_red">#D15962</color>
     <item name="white" type="color">#ffffff</item>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

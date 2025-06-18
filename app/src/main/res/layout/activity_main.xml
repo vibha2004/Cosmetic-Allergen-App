@@ -4,50 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@drawable/d2"
     tools:context=".MainActivity">
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp"
-        android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
+
+        <!-- Logo with better sizing -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:contentDescription="@string/parsafood_logo_descr"
+            android:src="@drawable/d1" />
+
+        <!-- Buttons with better styling and spacing -->
         <Button
             android:id="@+id/set_preferences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/set_allergens"
             android:textColor="@color/white"
             android:background="@drawable/rounded_btn"
-            android:fontFamily="@font/opensans_semibold"
-            android:padding="10dp"
-            android:text="@string/set_allergens"
-            android:textSize="20sp" />
+            android:padding="16dp"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/read_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:text="@string/scan_ingredients"
             android:textColor="@color/white"
             android:background="@drawable/rounded_btn"
-            android:padding="10dp"
-            android:text="@string/scan_ingredients"
-            android:textSize="20sp" />
+            android:padding="16dp"
+            android:textSize="18sp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="251dp"
-        android:layout_height="257dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/parsafood_logo_descr"
-        android:src="@drawable/d1" />
 </RelativeLayout>
